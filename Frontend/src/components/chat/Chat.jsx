@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-key */
 import { useEffect, useState, useContext, useRef } from "react";
@@ -63,7 +64,7 @@ export default function Chat(){
             text: newMessageText, 
             sender: id,
             recipient: selectedUserId,
-            id: Date.now(),
+            _id: Date.now(),
         }]));
 
     }
@@ -78,13 +79,15 @@ export default function Chat(){
 
     useEffect(() => {
         if(selectedUserId){
-            axios.get(`/messages/${selectedUserId}`)
+            axios.get(`/messages/${selectedUserId}`).then(res => {
+                setMessages(res.data)
+            })
         }
 
     }, [selectedUserId])
 
     
-    const messagesWithoutDupes = uniqBy(messages, 'id');
+    const messagesWithoutDupes = uniqBy(messages, '_id');
 
 // ..
 
@@ -122,9 +125,9 @@ export default function Chat(){
                         <div className="relative h-full w-full">
                             <div className="overflow-y-scroll absolute inset-0">
                                 {messagesWithoutDupes.map((message) => (
-                                    <div className={`${message.sender === id ? 'text-right' : 'text-left'}`}>
+                                    <div key={message._id} className={`${message.sender === id ? 'text-right' : 'text-left'}`}>
                                     <div className={
-                                        `overflow-hidden text-left shadow-lg border-1 border-gray-400  inline-block p-2 my-1 rounded-full  text-sm ${message.sender === id ? 
+                                        `overflow-hidden text-left shadow-lg border-2 border-gray-100 font-semibold inline-block p-2 my-1 rounded-md  text-sm ${message.sender === id ? 
                                         'bg-blue-500 text-white' : 
                                         'bg-white text-black'}`}>
                                         {message.text}
