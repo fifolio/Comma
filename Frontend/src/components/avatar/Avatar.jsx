@@ -13,7 +13,10 @@ export default function Avatar({userId, username, online}){
             <div className="text-center w-full capitalize font-bold opacity-70">
             {username[0]}
             </div>
-            {online ? <div className="absolute w-3 h-3 bg-green-400 border-2 border-gray-200 rounded-full top-[-5px] left-[-5px]"></div> : ''}
+            {online ? 
+                <div className="absolute w-3 h-3 bg-green-400 border-2 border-gray-200 rounded-full top-[-5px] left-[-5px]"></div> : 
+                <div className="absolute w-3 h-3 bg-gray-400 border-2 border-gray-200 rounded-full top-[-5px] left-[-5px]"></div> 
+                }
             
         </div>
     )
