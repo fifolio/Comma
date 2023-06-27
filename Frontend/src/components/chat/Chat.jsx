@@ -77,6 +77,16 @@ export default function Chat(){
     }, [messages]) 
 
 
+    // useEffect(() => {
+    //     axios.get('/people').then(res => {
+    //         const offlinePeople = res.data
+    //         .filter(person => person._id !== id)
+    //         .filter(person => Object.keys(onlinePeople).includes(person._id))
+
+    //     })
+    // }, [onlinePeople])
+
+
     useEffect(() => {
         if(selectedUserId){
             axios.get(`/messages/${selectedUserId}`).then(res => {
@@ -104,7 +114,7 @@ export default function Chat(){
                             <div className="w-1 bg-blue-500 h-8 rounded-r-lg"></div>
                         )}
                         <div className="flex items-center pr-2"></div>
-                        <Avatar username={onlinePeople[userId]} userId={userId} />
+                        <Avatar online={true} username={onlinePeople[userId]} userId={userId} />
                         <span className="text-gray-800">
                             <span className={userId === selectedUserId ? 'font-bold' : ''}>
                           {onlinePeople[userId]}
