@@ -88,6 +88,10 @@ app.post('/login', async (req, res) => {
 
 });
 
+app.post('/logout', (req, res) => {
+    res.cookie('token', '', {sameSite: 'none', secure:true}).json('ok');
+})
+
 app.post('/register', async (req, res) => {
     const { username, password } = req.body;
     
@@ -98,7 +102,9 @@ app.post('/register', async (req, res) => {
             password:hashedPassword 
         });
         jwt.sign({ userId: createdUser._id, username }, jwtSecret, {}, (err, token) => {
-            if (err) throw err;
+            if(err){
+                console.log('there an error')
+            }
             res.cookie('token', token, {sameSite: 'none', secure: true}).status(201).json({
                 id: createdUser._id
             });
@@ -139,6 +145,7 @@ wss.on('connection', (connection, req) => {
     connection.timer = setInterval(() => {
         connection.deathTimer = setTimeout(() => {
             connection.isAlive = false;
+            clearInterval(connection.timer)
             connection.terminate();
             notifyAboutOnlinePeople();
         }, 1000)
@@ -154,11 +161,14 @@ wss.on('connection', (connection, req) => {
     if(cookies){
         const  tokenCookieString = cookies.split(';').find(str => str.startsWith('token='));
         const token = tokenCookieString.split('=')[1]
-        jwt.verify(token, jwtSecret, {}, (err, userData) => {
-            if(err) throw err;
+        jwt.verify(token, jwtSecret, {}, async (err, userData) => {
+            if(err){
+                console.log('theres an err')
+            } else if (!err) {
             const {userId, username} = userData;
             connection.userId = userId;
             connection.username = username;
+            }
         });
     };
 

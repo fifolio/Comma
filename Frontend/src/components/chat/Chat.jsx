@@ -14,13 +14,13 @@ export default function Chat(){
     const [ws, setWs] = useState(null);
     const [onlinePeople, setOnlinePeople] = useState({});
     const [selectedUserId, setSelectedUserId] = useState(null);
-    const {username, id} = useContext(UserContext);
+    const {username, id, setId, setUsername} = useContext(UserContext);
     const [newMessageText, setNewMessageText]= useState('');
     const [offlinePeople, setOfflinePeople] = useState({});
     const [messages, setMessages]= useState([]);
     const divUnderMessages = useRef();
 
-
+  
     useEffect(() => {
         connectToWs()
     },[]);
@@ -104,35 +104,52 @@ export default function Chat(){
     
     const messagesWithoutDupes = uniqBy(messages, '_id');
 
-// ..
+
+    function logout() {
+        axios.post('/logout')
+        .then(() => {
+            setWs(null)
+            setId(null);
+            setUsername(null)
+            location.reload();
+        })
+    }
 
     return ( 
 
         <div className="flex h-screen">
 
-            <div className="bg-gray-50 w-1/3 pt-4">
+            <div className="bg-gray-50 w-1/3 pt-4 flex flex-col">
+                <div className="flex-grow">
                 <Logo />
-                {Object.keys(onlinePeopleExcludingOurUser).map(userId => (
-                   <Contact 
-                   key={userId}
-                   id={userId} 
-                   online={true}offlinePeople
-                    username={onlinePeopleExcludingOurUser[userId]} 
-                    onClick={()=> setSelectedUserId(userId)}
-                    selected={userId === selectedUserId}
-                    />
-                ))}
+                    {Object.keys(onlinePeopleExcludingOurUser).map(userId => (
+                    <Contact 
+                    key={userId}
+                    id={userId} 
+                    online={true}offlinePeople
+                        username={onlinePeopleExcludingOurUser[userId]} 
+                        onClick={()=> setSelectedUserId(userId)}
+                        selected={userId === selectedUserId}
+                        />
+                    ))}
 
-                {Object.keys(offlinePeople).map(userId => (
-                   <Contact 
-                   key={userId}
-                   id={userId} 
-                   online={false}
-                    username={offlinePeople[userId].username} 
-                    onClick={()=> setSelectedUserId(userId)}
-                    selected={userId === selectedUserId}
-                    />
-                ))}
+                    {Object.keys(offlinePeople).map(userId => (
+                    <Contact 
+                    key={userId}
+                    id={userId} 
+                    online={false}
+                        username={offlinePeople[userId].username} 
+                        onClick={()=> setSelectedUserId(userId)}
+                        selected={userId === selectedUserId}
+                        />
+                    ))}
+                </div>
+
+                <div className="p-2 text-center flex items-center justify-center">
+                    <span className="mr-2 text-sm text-gray-600 capitalize flex items-center">Hey {username}</span>
+                    <button onClick={logout} className="text-sm text-red-600 font-semibold shadow-sm bg-red-200 py-2 px-4 rounded-md ">Logout</button>
+                </div>
+
             </div>  
 
             <div className="flex flex-col bg-white w-2/3 p-2">
