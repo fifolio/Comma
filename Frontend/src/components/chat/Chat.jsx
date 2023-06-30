@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-no-target-blank */
+/* eslint-disable react/no-unknown-property */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-key */
@@ -54,19 +56,27 @@ export default function Chat(){
     const onlinePeopleExcludingOurUser = {...onlinePeople};
     delete onlinePeopleExcludingOurUser[id];
 
-    function sendMessage(e) {
-        e.preventDefault();
+    function sendMessage(e, file = null) {
+        if(e) e.preventDefault();
         ws.send(JSON.stringify({
                 recipient: selectedUserId,
                 text: newMessageText,
+                file
         }))
-        setNewMessageText('');
-        setMessages(prev => ([...prev, {
+        
+        if (file) {
+            axios.get('/messages'+selectedUserId).then(res => {
+                setMessages(res.data)
+            })
+        } else {
+            setNewMessageText('');
+            setMessages(prev => ([...prev, {
             text: newMessageText, 
             sender: id,
             recipient: selectedUserId,
             _id: Date.now(),
         }]));
+        }
 
     }
 
@@ -104,6 +114,16 @@ export default function Chat(){
     
     const messagesWithoutDupes = uniqBy(messages, '_id');
 
+    function sendFile(e){
+        const reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onload =() => {
+            sendMessage(null, {
+                name: e.target.files[0].name,
+                data: reader.result
+            });
+        };
+    }
 
     function logout() {
         axios.post('/logout')
@@ -169,9 +189,19 @@ export default function Chat(){
                                         'bg-blue-500 text-white' : 
                                         'bg-white text-black'}`}>
                                         {message.text}
+                                        {message.file && (
+                                            <div>
+                                                <a target="_blank" className="flex items-center gap-1 border-b" href={axios.defaults.baseURL + '/uploads/' + message.file}>
+                                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
+</svg>
+                                                    {message.file}</a>
+                                            </div>
+                                        )}
                                     </div>
                                     </div>
                                 ))}
+
                                 <div ref={divUnderMessages}></div>
                             </div>
                         
@@ -185,8 +215,14 @@ export default function Chat(){
 
                     <input value={newMessageText}
                     onChange={e => setNewMessageText(e.target.value)} type="text" placeholder="Type your message here" className="bg-white border p-2 flex-grow rounded-md" />
+<label type="button" className="bg-gray-200 p-2 text-gray-600 border border-gray-300 rounded-md cursor-pointer">
+    <input type="file" className="hidden" onChange={sendFile} />
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13" />
+</svg>
 
-                    <button type="submit" className="bg-blue-500 p-2 text-white rounded-md" >
+</label>
+                    <button type="submit" className="bg-blue-500 p-2 text-white text-semibold rounded-md" >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
   <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
 </svg>
