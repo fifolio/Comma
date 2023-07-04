@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useContext, useState } from "react"
 import { UserContext } from "../../UserContext";
-import login_main from '../../assets/login_main.png'
+import icon from '../../assets/icon.jpg'
 
 export default function RegisterAndLoginForm() {
 
@@ -25,15 +25,21 @@ export default function RegisterAndLoginForm() {
 
 return (
     <>
-    <div className="bg-gray-100 w-full h-screen flex gap-5 p-8">
+    <div className="bg-white w-full h-screen flex">
     
     {/* Right side */}
-    <div className="lg:flex md:hidden sm:hidden xs:hidden leftSide w-1/2 items-center justify-center">
-    <img src={login_main} className='min-w-[500px] rounded-[20px] shadow-lg' />    
+    <div className="hidden md:inline lg:inline xl:inline leftSide w-1/3 items-center" 
+    style={{backgroundColor: '#1AEAB6'}}>
+
+        <div className="flex flex-col items-center justify-center w-full h-screen">
+            {/* <img src={icon} className='w-[90px] shadow-lg rounded-full m-5' /> */}
+            New Here?
+        </div>
+
     </div>
 
     {/* Left side */}
-    <div className="rightSide w-1/2 bg-red-100">222</div>
+    <div className="mx-auto rightSide w-2/3 bg-white">222</div>
     </div>
     
     </>
