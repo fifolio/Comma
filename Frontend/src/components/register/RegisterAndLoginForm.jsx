@@ -3,6 +3,7 @@ import { useContext, useState } from "react"
 import { UserContext } from "../../UserContext";
 import icon from '../../assets/icon.jpg'
 
+
 export default function RegisterAndLoginForm() {
 
     const [username, setUsername] = useState('');
@@ -23,23 +24,33 @@ export default function RegisterAndLoginForm() {
 
     }
 
+   
+
 return (
     <>
     <div className="bg-white w-full h-screen flex">
     
     {/* Right side */}
-    <div className="hidden md:inline lg:inline xl:inline leftSide w-1/3 items-center" 
-    style={{backgroundColor: '#1AEAB6'}}>
+    <div className="hidden md:inline lg:inline xl:inline leftSide w-3/3 items-center" 
+    style={{
+        'background-image': 'linear-gradient(to top, #f77062 0%, #fe5196 100%)'
+
+    }}>
 
         <div className="flex flex-col items-center justify-center w-full h-screen">
-            {/* <img src={icon} className='w-[90px] shadow-lg rounded-full m-5' /> */}
-            New Here?
+            <img src={icon} className='w-[90px] mt-[-100px] shadow-md rounded-full m-5' />
+            <div className="max-w-[400px] px-[30px] text-center">
+            <h1 className="text-white font-bold text-[24px] mb-2">New? Create Account Now 🤗</h1>
+            <h3 className='text-white font-semibold text-[15px] mb-4'>To keep connected with us please create an account now using your personal info</h3>
+            <button className="bg-white p-3 rounded-full font-bold shadow-md border hover hover:bg-gray-200 text-gray-700 hover:text-black">Create New Account &rarr;</button>
+            </div>
+            
         </div>
 
     </div>
 
     {/* Left side */}
-    <div className="mx-auto rightSide w-2/3 bg-white">222</div>
+    {/* <div className="mx-auto rightSide w-2/3 bg-white">222</div> */}
     </div>
     
     </>
