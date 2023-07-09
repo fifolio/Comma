@@ -3,14 +3,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-key */
+import axios from "axios";
 import { useEffect, useState, useContext, useRef } from "react";
 import { uniqBy } from 'lodash';
-// import Avatar from "../avatar/Avatar";
-// import Logo from "../logo/Logo";
 import {UserContext} from '../../UserContext'
-import axios from "axios";
 import Contact from "../contact/Contact";
 import icon from '../../../public/icon.jpg'
+// import Avatar from "../avatar/Avatar";
+// import Logo from "../logo/Logo";
 
 export default function Chat(){
 
