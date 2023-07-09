@@ -21,9 +21,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser())
 app.use(cors({
+    origin: 'https://comma.netlify.app',
     credentials: true,
-    origin: process.env.CLIENT_URL,
 }));
+
 
 const bcryptSalt = bcrypt.genSaltSync(10)
 
@@ -32,9 +33,12 @@ async function getUserDataFromRequest(req) {
         const token = req.cookies?.token;
         if (token) {
             jwt.verify(token, jwtSecret, {}, (err, userData) => {
-                if (err) throw err;
-                resolve(userData)
-            })
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(userData)
+                }
+            });
         } else {
             reject('no token ')
         }
@@ -46,14 +50,18 @@ app.get('/test', (req, res) => {
 })
 
 app.get(`/messages/:userId`, async (req, res) => {
-    const {userId} = req.params;
-    const userData = await getUserDataFromRequest(req)
-    const ourUserId = userData.userId;
-    const messages = await Message.find({
-        sender: {$in:[userId, ourUserId]},
-        recipient: {$in: [userId, ourUserId]}
-    }).sort({createdAt: 1});
-    res.json(messages)
+    try {
+        const {userId} = req.params;
+        const userData = await getUserDataFromRequest(req)
+        const ourUserId = userData.userId;
+        const messages = await Message.find({
+            sender: {$in:[userId, ourUserId]},
+            recipient: {$in: [userId, ourUserId]}
+        }).sort({createdAt: 1});
+        res.json(messages)
+    } catch (error) {
+        res.status(401).json('Unauthorized')
+    }
 })
 
 
@@ -120,11 +128,12 @@ app.post('/register', async (req, res) => {
 
 // --------------------------------------- //
 
-const server = app.listen(4000, () => {
-    console.log('Server started on port 4000')
-})
-
-const wss = new ws.WebSocketServer({server});
+const server = app.listen(process.env.PORT || 4000, () => {
+    console.log('Server connected');
+  });
+  
+  const wss = new ws.WebSocketServer({ server });
+  
 
 wss.on('connection', (connection, req) => {
     // console.log(`user is connected`, Date.now());
