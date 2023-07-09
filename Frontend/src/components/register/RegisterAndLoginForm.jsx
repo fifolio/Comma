@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useContext, useState } from "react"
 import { UserContext } from "../../UserContext";
-import icon from '../../assets/icon.jpg'
+import icon from '../../../public/icon.jpg'
 
 
 export default function RegisterAndLoginForm() {

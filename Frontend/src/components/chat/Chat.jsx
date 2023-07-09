@@ -226,9 +226,9 @@ export default function Chat(){
                                 {messagesWithoutDupes.map((message) => (
                                     <div key={message._id} className={`${message.sender === id ? 'text-right' : 'text-left'}`}>
                                     <div className={
-                                        `overflow-hidden text-left shadow-lg border-2 border-gray-100 font-semibold inline-block p-2 my-1 rounded-md  text-sm ${message.sender === id ? 
+                                        `overflow-hidden text-left shadow-lg font-semibold inline-block p-2 my-1 rounded-full  text-sm ${message.sender === id ? 
                                         'bg-blue-500 text-white' : 
-                                        'bg-white text-black'}`}>
+                                        'bg-[#ff5c6a] text-white'}`}>
                                         {message.text}
                                         {message.file && (
                                             <div>
