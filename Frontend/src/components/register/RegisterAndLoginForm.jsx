@@ -51,14 +51,13 @@ return (
     </div>
 
     {/* Left side */}
-    <div className="mx-auto rightSide w-full bg-gray-50 items-center pt-[150px] ">
+    <div className="mx-auto rightSide w-full bg-gray-50 items-center pt-[120px] ">
         <div className="mx-auto text-center">
             <h1 className='text-[35px] font-bold text-[#ff5c6a] drop-shadow-md'>Welcome Back! 😍</h1>
             <h3 className='text-gray-900 text-[15px] my-4 w-[65%] mx-auto mb-10'>Welcome to our vibrant and engaging chat community! We are thrilled to have you here, ready to connect with amazing people from around the world.</h3>
-        </div>
-
-    <div className="mx-auto" style={{'maxWidth': 'max-content'}}>
-               <form className="w-64 mx-auto mb-12" onSubmit={handleSubmit}>
+</div>
+           <div className="mx-auto" style={{'maxWidth': 'max-content'}}>
+               <form className="w-64 mx-auto mb-7" onSubmit={handleSubmit}>
 
                      <input value={username} onChange={event => setUsername(event.target.value)} type="text" placeholder="Username" className="block w-full rounded-full p-2 mb-2 border" />
 
@@ -81,7 +80,15 @@ return (
                         )}
                     </div>
                 </form>
+
+                
             </div>
+
+            <div className="p-2 flex justify-center">
+                    <a href="https://github.com/fifolio/Comma" target="_blank">
+                    <img width={35} src="https://th.bing.com/th/id/R.724794164fb289dd2f7d69dde7ac3bc0?rik=H5bTVhjLhZdHOQ&pid=ImgRaw&r=0" alt="github repo" />
+                    </a>
+                </div>
     </div>
     </div>
     
