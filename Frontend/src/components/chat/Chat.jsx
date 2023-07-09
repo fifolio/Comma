@@ -206,7 +206,7 @@ export default function Chat(){
                 </div>
 
                 <div className="p-2 flex justify-center mt-10">
-                    <a href="#" target="_blank">
+                    <a href="https://github.com/fifolio/Comma" target="_blank">
                         <img width={40} src="https://th.bing.com/th/id/R.724794164fb289dd2f7d69dde7ac3bc0?rik=H5bTVhjLhZdHOQ&pid=ImgRaw&r=0" alt="github repo" />
                     </a>
                 </div>
