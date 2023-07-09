@@ -31,13 +31,13 @@ Join the future of chat applications with "Comma" – a feature-rich, reliable, 
 </code></pre>
 
 <h3>Backend:</h3>
-<pre><code class="has-line-data" data-line-start="16" data-line-end="19" class="language-sh">
+<pre><code class="code-line" data-line-start=20 data-line-end=21 >
   cd Comma
   cd backend
   npm install
 </code></pre>
 <h4 class="code-line" data-line-start=20 data-line-end=21 ><a id="Usage_20"></a>Usage</h2>
-<pre><code class="has-line-data" data-line-start="22" data-line-end="24" class="language-sh">node app.js
+<pre><code class="code-line" data-line-start=20 data-line-end=21 >node app.js
 </code></pre>
 
 <h2 class="code-line" data-line-start=33 data-line-end=34 ><a id="Technologies_Used_33"></a>Technologies Used</h2>
