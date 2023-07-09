@@ -21,13 +21,13 @@ Join the future of chat applications with "Comma" – a feature-rich, reliable, 
 <p class="has-line-data" data-line-start="13" data-line-end="14">Once you have the repository on your local machine, navigate to the project directory and install the necessary dependencies:</p>
 
 <h3>Frontend:</h3>
-<pre><code class="has-line-data" data-line-start="16" data-line-end="19" class="language-sh">
+<pre><code>
   cd Comma
   cd frontend
   npm install
 </code></pre>
 <h4 class="code-line" data-line-start=20 data-line-end=21 ><a id="Usage_20"></a>Usage</h2>
-<pre><code class="has-line-data" data-line-start="22" data-line-end="24" class="language-sh">npm run dev
+<pre><code>npm run dev
 </code></pre>
 
 <h3>Backend:</h3>
@@ -49,7 +49,7 @@ Join the future of chat applications with "Comma" – a feature-rich, reliable, 
   <li class="has-line-data" data-line-start="38" data-line-end="39">Render</li>
   <li class="has-line-data" data-line-start="38" data-line-end="39">Axios</li>
 <li class="has-line-data" data-line-start="39" data-line-end="40">MongoDB</li>
-  <li class="has-line-data" data-line-start="39" data-line-end="40">websockets</li>
+  <li class="has-line-data" data-line-start="39" data-line-end="40">Websockets</li>
 <li class="has-line-data" data-line-start="40" data-line-end="42">Tailwind Css</li>
 <li class="has-line-data" data-line-start="40" data-line-end="42">Figma</li>
 </ul>
