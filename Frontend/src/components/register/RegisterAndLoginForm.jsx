@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import axios from 'axios'
 import { useContext, useState } from "react"
 import { UserContext } from "../../UserContext";
@@ -28,7 +29,7 @@ export default function RegisterAndLoginForm() {
 
 return (
     <>
-    <div className="bg-white max-w-[1424px] mx-auto h-screen flex">
+    <div className="bg-white max-w-[1440px] mx-auto h-screen flex">
     
     {/* Right side */}
     <div className="hidden md:inline lg:inline xl:inline leftSide w-2/3 items-center" 
@@ -37,12 +38,12 @@ return (
 
     }}>
 
-        <div className="flex flex-col items-center justify-center w-full h-screen">
+        <div className="flex flex-col items-center pt-[250px] w-full h-screen">
             <img src={icon} className='w-[90px] mt-[-100px] shadow-md rounded-full m-5' />
             <div className="max-w-[400px] px-[30px] text-center">
             <h1 className="text-white font-bold text-[19px] mb-2">New? Create Account Now</h1>
             <h3 className='text-white font-semibold text-[15px] mb-8'>To keep connected with us please create an account now using your personal info</h3>
-            <a href="#" target='_blank' className="bg-white px-5 py-3 text-[14px] rounded-full font-bold shadow-md border hover hover:bg-gray-200 text-gray-800 hover:text-black">Github Repository &rarr;</a>
+            <a href="https://github.com/fifolio/Comma" target='_blank' className="bg-white px-5 py-3 text-[14px] rounded-full font-bold shadow-md border hover hover:bg-gray-200 text-gray-800 hover:text-black">Github Repository &rarr;</a>
             </div>
             
         </div>
