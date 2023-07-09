@@ -30,7 +30,7 @@ export default function Chat(){
     },[]);
 
     function connectToWs(){
-        const ws = new WebSocket('wss://comma-backend.onrender.com')
+        const ws = new WebSocket('ws://comma-backend.onrender.com')
         setWs(ws)
         ws.addEventListener('message', handleMessage)
         ws.addEventListener('close', () => connectToWs())
