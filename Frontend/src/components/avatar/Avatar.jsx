@@ -9,7 +9,7 @@ export default function Avatar({userId, username, online}){
     const color = colors[colorIndex];
 
     return (
-        <div className={`w-8 h-8 relative shadow-sm border rounded-md flex items-center ${color}`}>
+        <div className={`w-8 h-8 relative shadow-sm border rounded-full flex items-center ${color}`}>
             <div className="text-center w-full capitalize font-bold opacity-70">
             {username[0]}
             </div>

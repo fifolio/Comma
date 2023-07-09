@@ -33,7 +33,7 @@ return (
     {/* Right side */}
     <div className="hidden md:inline lg:inline xl:inline leftSide w-2/3 items-center" 
     style={{
-        'background-image': 'linear-gradient(to top, #f77062 0%, #fe5196 100%)'
+        'backgroundImage': 'linear-gradient(to top, #f77062 0%, #fe5196 100%)'
 
     }}>
 
@@ -56,7 +56,7 @@ return (
             <h3 className='text-gray-900 text-[15px] my-4 w-[65%] mx-auto mb-10'>Welcome to our vibrant and engaging chat community! We are thrilled to have you here, ready to connect with amazing people from around the world.</h3>
         </div>
 
-    <div className="mx-auto" style={{'max-width': 'max-content'}}>
+    <div className="mx-auto" style={{'maxWidth': 'max-content'}}>
                <form className="w-64 mx-auto mb-12" onSubmit={handleSubmit}>
 
                      <input value={username} onChange={event => setUsername(event.target.value)} type="text" placeholder="Username" className="block w-full rounded-full p-2 mb-2 border" />
